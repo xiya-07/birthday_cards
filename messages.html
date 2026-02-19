@@ -5,19 +5,147 @@
   <title>Birthday Messages</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="messages">
 
-  <div class="card">
-    <h2>💌 Birthday Messages</h2>
+  <div class="message-card" id="messageCard">
+    <h1>💌 Birthday Messages</h1>
+    <p class="text">Wishing you a day filled with love, laughter, and unforgettable moments! Happy Birthday! 🎉</p >
+  </div>
 
-    <p><strong>Sarah:</strong> Wishing you endless happiness 🎈</p>
-    <p><strong>John:</strong> Hope all your dreams come true 🎉</p>
-
-    <div class="nav">
-      <a href="index.html">⬅ Back</a>
-      <a href="photos.html">Next ➡</a>
+  <div class="question-card" id="questionCard" style="display: none;">
+    <h2>are u ready for a little throwback dear</h2>
+    <div class="button-group">
+      <button class="yes-btn" id="yesBtn">YAH</button>
+      <button class="no-btn" id="noBtn">NAH</button>
     </div>
   </div>
 
+  <div class="photos-section" id="photosSection" style="display: none;">
+    <h2>📸 Photo Gallery</h2>
+    <p>Here are some of our favorite memories together! Hope they bring a smile to your face! 😊</p>
+    <div class="photos-grid" id="photosGrid">
+      <img src="images/img.jpg" class="photo" alt="Memory 1" data-caption="Our first adventure together 💕">
+      <img src="images/img2.jpg" class="photo" alt="Memory 2" data-caption="Laughing at silly moments 😂">
+      <img src="images/img3.jpg" class="photo" alt="Memory 3" data-caption="Sweet memories with you ✨">
+      <img src="images/img4.jpg" class="photo" alt="Memory 4" data-caption="Cherishing every moment 🎉">
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox" style="display: none;">
+    <span class="close-lightbox" id="closeLightbox">&times;</span>
+    <button class="prev-btn" id="prevBtn">❮</button>
+    <div class="lightbox-content">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+    <button class="next-btn" id="nextBtn">❯</button>
+    <div class="photo-counter" id="photoCounter"></div>
+  </div>
+
+  <div class="response-message" id="responseMessage" style="display: none;">
+    <h2>Okay that's cool too 💭</h2>
+    <p>Maybe next time!</p>
+  </div>
+
+  <div class="bottom-nav">
+
+    <button class="nav-btn" id="toggleBtn">u found it</button>
+    
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const messageCard = document.getElementById('messageCard');
+    const questionCard = document.getElementById('questionCard');
+    const photosSection = document.getElementById('photosSection');
+    const responseMessage = document.getElementById('responseMessage');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    let showingQuestion = false;
+
+    toggleBtn.addEventListener('click', function() {
+      showingQuestion = !showingQuestion;
+      messageCard.style.display = showingQuestion ? 'none' : 'block';
+      questionCard.style.display = showingQuestion ? 'block' : 'none';
+      photosSection.style.display = 'none';
+      responseMessage.style.display = 'none';
+      toggleBtn.textContent = showingQuestion ? 'go back' : 'u found it';
+    });
+
+    yesBtn.addEventListener('click', function() {
+      questionCard.style.display = 'none';
+      photosSection.style.display = 'block';
+      responseMessage.style.display = 'none';
+    });
+
+    noBtn.addEventListener('click', function() {
+      questionCard.style.display = 'none';
+      photosSection.style.display = 'none';
+      responseMessage.style.display = 'block';
+    });
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeLightbox = document.getElementById('closeLightbox');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const photoCounter = document.getElementById('photoCounter');
+    const photos = document.querySelectorAll('.photo');
+    let currentPhotoIndex = 0;
+
+    function updateLightbox(index) {
+      if (index < 0) currentPhotoIndex = photos.length - 1;
+      if (index >= photos.length) currentPhotoIndex = 0;
+      
+      const currentPhoto = photos[currentPhotoIndex];
+      lightboxImg.src = currentPhoto.src;
+      lightboxCaption.textContent = currentPhoto.getAttribute('data-caption');
+      photoCounter.textContent = `${currentPhotoIndex + 1} / ${photos.length}`;
+    }
+
+    photos.forEach((photo, index) => {
+      photo.addEventListener('click', function() {
+        currentPhotoIndex = index;
+        lightbox.style.display = 'flex';
+        updateLightbox(currentPhotoIndex);
+      });
+    });
+
+    prevBtn.addEventListener('click', function() {
+      currentPhotoIndex--;
+      updateLightbox(currentPhotoIndex);
+    });
+
+    nextBtn.addEventListener('click', function() {
+      currentPhotoIndex++;
+      updateLightbox(currentPhotoIndex);
+    });
+
+    closeLightbox.addEventListener('click', function() {
+      lightbox.style.display = 'none';
+    });
+
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (lightbox.style.display === 'flex') {
+        if (e.key === 'ArrowLeft') prevBtn.click();
+        if (e.key === 'ArrowRight') nextBtn.click();
+        if (e.key === 'Escape') closeLightbox.click();
+      }
+    });
+  </script>
+
 </body>
-</html>
+    });
+  </script>
+
+</body>

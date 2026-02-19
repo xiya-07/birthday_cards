@@ -7,15 +7,31 @@
 </head>
 <body>
 
-  <div class="card">
-    <h1>🎂 Happy Birthday, tiffanny!</h1>
-    <p>Welcome to your birthday page 💖</p>
-
-    <div class="nav">
-      <a href="messages.html">Messages 💌</a>
-      <a href="photos.html">Photos 📸</a>
+  <div class="envelope" id="envelope">
+    <div class="envelope-flap">
+      <p class="envelope-greeting">hi TRISHIA</p>
     </div>
-  </div>
+    <div class="envelope-body">
+
+      <div class="card" id="card">
+        <h1>Getting older?!</h1>
+        <p>its ur birthday today?! 💖</p>
+        <a href="messages.html" class="card-link">View Messages 💌</a>
+      </div>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const card = document.getElementById('card');
+    let isOpen = false;
+
+    envelope.addEventListener('click', function() {
+      if (!isOpen) {
+        isOpen = true;
+        envelope.classList.add('open');
+        card.classList.add('show');
+      }
+    });
+  </script>
 
 </body>
 </html>
