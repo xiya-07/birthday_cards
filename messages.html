@@ -2,15 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Birthday Messages</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="messages">
 
+  <div class="balloon-container">
+    <div class="balloon balloon-1"></div>
+    <div class="balloon balloon-2"></div>
+    <div class="balloon balloon-3"></div>
+    <div class="balloon balloon-4"></div>
+    <div class="balloon balloon-5"></div>
+  </div>
+
   <div class="message-card" id="messageCard">
-    <h1>💌 Birthday Messages</h1>
+    <h1>HAPPIEST BIRTHDAYYYY ABBIE</h1>
     <p class="text">Wishing you a day filled with love, laughter, and unforgettable moments! Happy Birthday! 🎉</p >
   </div>
+
 
   <div class="question-card" id="questionCard" style="display: none;">
     <h2>are u ready for a little throwback dear</h2>
@@ -48,30 +58,13 @@
     <p>Maybe next time!</p>
   </div>
 
-  <div class="bottom-nav">
-
-    <button class="nav-btn" id="toggleBtn">u found it</button>
-    
-  </div>
-
   <script>
-    const toggleBtn = document.getElementById('toggleBtn');
     const messageCard = document.getElementById('messageCard');
     const questionCard = document.getElementById('questionCard');
     const photosSection = document.getElementById('photosSection');
     const responseMessage = document.getElementById('responseMessage');
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
-    let showingQuestion = false;
-
-    toggleBtn.addEventListener('click', function() {
-      showingQuestion = !showingQuestion;
-      messageCard.style.display = showingQuestion ? 'none' : 'block';
-      questionCard.style.display = showingQuestion ? 'block' : 'none';
-      photosSection.style.display = 'none';
-      responseMessage.style.display = 'none';
-      toggleBtn.textContent = showingQuestion ? 'go back' : 'u found it';
-    });
 
     yesBtn.addEventListener('click', function() {
       questionCard.style.display = 'none';
@@ -145,7 +138,4 @@
   </script>
 
 </body>
-    });
-  </script>
-
-</body>
+</html>
